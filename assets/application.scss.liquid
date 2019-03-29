@@ -7,6 +7,7 @@ $color-accent: #ff3700;
 $color-text: #555555;
 $color-label: #707070;
 $color-border: #dedede;
+$color-empty-bg: #bbb;
 
 $line-global: 20px;
 $gutter-global: $line-global * 2;
@@ -177,6 +178,7 @@ ol {
   padding: $gutter-global;
   width: calc(50% + #{$gutter-global / 2});
   margin-left: auto;
+  grid-template-rows: minmax(max-content, auto) minmax(min-content, max-content);
 }
 
 .sticky-side-image {
@@ -207,12 +209,18 @@ ol {
 
 //global styles
 
-.link-to-cart {
+.link-to-cart,
+.link-to-home {
   position: fixed;
   top: 0;
   right: 0;
   padding: $gutter-global;
   color: $color-text;
+}
+.cart-item-count {
+  color: $white;
+  text-align: center;
+  border-radius: 50%;
 }
 
 .link-to-cart .cart-item-count {
@@ -255,7 +263,6 @@ ol {
 #page-index {
 }
 #product-info {
-  grid-template-rows: minmax(max-content, auto) minmax(min-content, max-content);
 }
 
 #product-info-content {
@@ -289,4 +296,58 @@ ol {
 
 .form-wrapper {
   padding-top: $line-global * 3;
+}
+
+//cart styles
+
+#cart {
+  background: $color-empty-bg;
+  color: $white;
+}
+
+#cart-title {
+  position: relative;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke-color: $white;
+  -webkit-text-stroke-width: 2px;
+  -moz-text-fill-color: transparent;
+  -moz-text-stroke-color: $white;
+  -moz-text-stroke-width: 2px;
+}
+
+#cart .cart-item-count {
+  display: block;
+  font-size: 0.08em;
+  border: 2px solid $white;
+  width: 2em;
+  height: 2em;
+  line-height: 2em;
+  position: absolute;
+  top: 1em;
+  right: 0;
+}
+
+#cart-empty-lines,
+#back-to-fitra {
+  grid-column: 2;
+}
+
+.empty-line {
+  border-top: 1px solid $white;
+  height: $line-global * 3;
+}
+.empty-line:first-child {
+  margin-top: $line-global;
+}
+
+.empty-line:last-child {
+  border-bottom: 1px solid $white;
+}
+
+#back-to-fitra {
+  margin-bottom: $line-global;
+}
+
+#cart a {
+  color: inherit;
 }
