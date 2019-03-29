@@ -15,6 +15,7 @@ $body-font-size: 15px;
 $label-font-size: 12px;
 
 $standard-border: 1px solid $color-border;
+$black-border: 1px solid $black;
 
 @mixin reset-input {
   appearance: none;
@@ -67,6 +68,11 @@ ol {
   padding: 0;
   font-weight: 400;
 }
+
+a {
+  text-decoration: none;
+}
+
 //Style Guide
 
 .headline-big {
@@ -102,13 +108,37 @@ label {
   color: $color-label;
 }
 
-select {
+.styled-select select {
   @include reset-input;
   width: 100%;
   font-size: $body-font-size;
   line-height: $line-global;
   padding: $line-global;
-  border: $standard-border;
+  border: $black-border;
+}
+
+.styled-select {
+  position: relative;
+}
+
+.styled-select .select-arrow {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  bottom: 1px;
+  width: $line-global * 3;
+
+  text-align: center;
+  line-height: $line-global * 3;
+  border-left: $black-border;
+  pointer-events: none;
+}
+
+.styled-select .select-arrow img {
+  display: inline-block;
+  vertical-align: middle;
+  width: 16px;
+  height: 16px;
 }
 
 button {
@@ -145,7 +175,7 @@ ol {
 .main-content {
   min-height: 100vh;
   padding: $gutter-global;
-  width: 50%;
+  width: calc(50% + #{$gutter-global / 2});
   margin-left: auto;
 }
 
@@ -154,7 +184,7 @@ ol {
   left: 0;
   top: $gutter-global;
   bottom: $gutter-global;
-  width: 50%;
+  width: calc(50% - #{$gutter-global / 2});
 }
 
 .sticky-side-image img {
@@ -175,12 +205,61 @@ ol {
   justify-content: flex-end;
 }
 
+//global styles
+
+.link-to-cart {
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: $gutter-global;
+  color: $color-text;
+}
+
+.link-to-cart .cart-item-count {
+  display: block;
+  font-size: 0px;
+  width: 10px;
+  height: 10px;
+  background: $color-border;
+  border-radius: 50%;
+  margin-top: 4px;
+}
+
+.link-to-cart .cart-text {
+  display: block;
+  opacity: 0;
+  position: absolute;
+  right: calc(100% - #{$gutter-global / 2});
+  top: $gutter-global;
+  white-space: nowrap;
+  transition: all 0.8s;
+  transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.link-to-cart:hover .cart-text {
+  opacity: 1;
+}
+
+.link-to-cart.cart-filled .cart-item-count {
+  width: 20px;
+  height: 20px;
+  background: $color-accent;
+  font-size: $label-font-size;
+  line-height: $line-global;
+  color: $white;
+  text-align: center;
+  margin-top: 0;
+}
 //index styles
 
 #page-index {
 }
 #product-info {
   grid-template-rows: minmax(max-content, auto) minmax(min-content, max-content);
+}
+
+#product-info-content {
+  grid-row-gap: $gutter-global / 2;
 }
 .headline {
   padding-bottom: $line-global * 3;
